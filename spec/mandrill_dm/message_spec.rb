@@ -166,7 +166,17 @@ describe MandrillDm::Message do
   pending '#signing_domain'
   pending '#return_path_domain'
   pending '#merge'
-  pending '#global_merge_vars'
+
+  # describe '#global_merge_vars' do
+  #   pending
+  #   it 'takes global merge vars' do
+  #     merge_vars = [{"name"=>"var1", "content"=>"Global Value 1"}, {"name"=>"var2", "content"=>"Global Value 2"}]
+  #     mail = mail(:global_merge_vars => merge_vars)
+  #     message = described_class.new(mail)
+  #     expect(message.global_merge_vars.to).to eq merge_vars
+  #   end
+  # end
+
   pending '#merge_vars'
   pending '#tags'
 
@@ -187,9 +197,9 @@ describe MandrillDm::Message do
 
   describe "#to_json" do
     it "returns a proper JSON response for the Mandrill API" do
-      mail = mail(body: 'test', from: 'name@domain.tld')
+      mail = mail(body: 'test', from: 'name@domain.tld', global_merge_vars: [{"name"=>"var1", "content"=>"Global Value 1"}, {"name"=>"var2", "content"=>"Global Value 2"}])
       message = described_class.new(mail)
-      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to)
+      expect(message.to_json).to include(:from_email, :from_name, :html, :subject, :to, :global_merge_vars)
     end
   end
 end

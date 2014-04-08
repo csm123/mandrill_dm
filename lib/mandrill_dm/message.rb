@@ -11,7 +11,7 @@ module MandrillDm
     end
     
     def global_merge_vars
-      @mail[:global_merge_vars]
+      @mail.header["global_merge_vars"]
     end
 
     def bcc_address
@@ -53,7 +53,8 @@ module MandrillDm
         subject: subject,
         from_email: from_email,
         from_name: from_name,
-        to: to
+        to: to,
+        global_merge_vars: global_merge_vars
       }
     end
 
