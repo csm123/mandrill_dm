@@ -5,6 +5,14 @@ module MandrillDm
     def initialize(mail)
       @mail = mail
     end
+    
+    def merge_vars
+      @mail[:merge_vars]
+    end
+    
+    def global_merge_vars
+      @mail[:global_merge_vars]
+    end
 
     def bcc_address
       @mail.header["bcc_address"].to_s
